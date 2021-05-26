@@ -5,6 +5,8 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import random
+
+
 # import matplotlib.pyplot as plt
 
 # reading text from a file and converting them to lower case with removal of punctuations
@@ -29,6 +31,7 @@ def preprocess_line(cleaned_text):
             final_words.append(word)
 
     return final_words
+
 
 # identifying emotion
 
@@ -60,7 +63,6 @@ def sentiment_analyse(sentiment_text):
     return sentiment
 
 
-
 # type of text analysis
 posts = nltk.corpus.nps_chat.xml_posts()[:10000]
 
@@ -78,7 +80,7 @@ def bot_response(sentiment):
            "It seems like you’ve been thinking about this a lot."]
     neu = ["That’s okay.", "Okay!", "Okay, let’s keep going.", "That’s really understandable. "]
     neg = ["I understand how you feel.", "I see how that can be frustrating.", "That must be really frustrating."
-           , "This is really bothering you."]
+        , "This is really bothering you."]
     if sentiment == "negative":
         return random.choice(neg)
     elif sentiment == "positive":
@@ -96,6 +98,7 @@ fig.autofmt_xdate()
 plt.savefig('graph.png')
 plt.show()
 """
+
 
 # processing sentence to get emotions/sentiments and bots response
 
@@ -126,16 +129,16 @@ def sentence_processing(text):
     classifier = nltk.NaiveBayesClassifier.train(train_set)
     # print(nltk.classify.accuracy(classifier, test_set))
     sentence_type = classifier.classify(dialogue_act_features(text))
+    bot_res2 = ""
     if sentence_type == 'whQuestion':
         bot_res2 = "Let's focus more on the session."
 
-    return bot_res1
+    res = bot_res1 + bot_res2
+    return res
+
 
 """
 if __name__=="__main__":
     text = input("User: ")
     print(sentence_processing(text))
     """
-
-
-
